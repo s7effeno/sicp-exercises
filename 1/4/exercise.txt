@@ -1,0 +1,6 @@
+(define (a_plus_abs_b a b) ((if (> b 0) + -) a b)) =>
+
+in case b is > 0:
+    (a_plus_abs_b a b) => ((if (> b 0) + -) a b) => ((if #t + -) a b) => (+ a b)
+in case b is <= 0:
+    (a_plus_abs_b a b) => ((if (> b 0) + -) a b) => ((if #f + -) a b) => (- a b)
