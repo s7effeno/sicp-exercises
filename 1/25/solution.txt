@@ -1,0 +1,3 @@
+Alyssa P. Hacker is indeed correct but using her technique it would be required
+to handle (much) bigger numbers, making the program slower, since arbitrary-length
+"software" number are slower than fixed-length "hardware" numbers.
