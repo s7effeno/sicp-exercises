@@ -19,12 +19,22 @@
     (if (or (= k n) (= k 0))
         1
         (* 2 (+ 1 (remainder k 2)))))
-  (define (simpson-term k) (* (y k) (simpson-multiplier k)))
+  (define (simpson-term k)
+    (* (simpson-multiplier k) (y k)))
   (if (odd? n)
       (simpson f a b (+ n 1))
-      (sum simpson-term (y 0) inc n)))
+      (* (/ h 3)
+         (sum simpson-term a inc n))))
 
 (display (simpson cube 0 1 100.0))
 (newline)
 (display (simpson cube 0 1 1000.0))
+(newline)
+
+(define (integral f a b dx)
+  (define (add-dx x) (+ x dx))
+  (* (sum f (+ a (/ dx 2.0)) add-dx b) 
+     dx))
+
+(display (integral cube 0 1 0.01))
 (newline)
