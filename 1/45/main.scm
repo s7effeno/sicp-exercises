@@ -1,0 +1,71 @@
+(define (even? n)
+  (= (remainder n 2) 0))
+(define (odd? n)
+  (not (even? n)))
+(define (square n)
+  (* n n))
+(define (exp b n)
+  (define (exp-iter a b n)
+    (cond ((= n 0) a)
+          ((even? n) (exp-iter a (square b) (/ n 2)))
+          ((odd? n) (exp-iter (* a b) b (- n 1)))))
+  (exp-iter 1 b n))
+
+(define (log_b x b)
+  (/ (log x) (log b)))
+
+(define tolerance 0.00001)
+
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) 
+       tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(define (fixed-point-of-transform 
+         g transform guess)
+  (fixed-point (transform g) guess))
+
+(define (compose f g)
+  (lambda (x)
+    (f (g x))))
+
+(define (identity x) x)
+(define (repeated f n)
+  (if (= n 0)
+    identity
+    (compose f (repeated f (- n 1)))))
+
+(define (average a b) (/ (+ a b) 2))
+(define (average-damp f)
+  (lambda (x) 
+    (average x (f x))))
+
+(define (nth-root x n)
+  (fixed-point-of-transform 
+   (lambda (y) (/ x (exp y (- n 1))))
+   (repeated average-damp (floor (log_b n 2)))
+   1.0))
+
+(display (nth-root 4 2))
+(newline)
+(display (nth-root 8 3))
+(newline)
+(display (nth-root 16 4))
+(newline)
+(display (nth-root 32 5))
+(newline)
+(display (nth-root 64 6))
+(newline)
+(display (nth-root 128 7))
+(newline)
+(display (nth-root 256 8))
+(newline)
+(display (nth-root 512 9))
+(newline)
+(display (nth-root 1024 10))
