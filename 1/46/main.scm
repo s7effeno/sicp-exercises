@@ -22,13 +22,10 @@
   (define (close-enough? v1 v2)
     (< (abs (- v1 v2)) 
        tolerance))
-  (iterative-improve f close-enough)
-  (define (try guess)
-    (let ((next (f guess)))
-      (if (close-enough? guess next)
-          next
-          (try next))))
-  (try first-guess))
-
+  ((iterative-improve f 
+                      (lambda (x)(close-enough? x (f x))))
+   first-guess))
 
 (display (sqrt 1.0 625))
+(newline)
+(display (fixed-point cos 1.0))
