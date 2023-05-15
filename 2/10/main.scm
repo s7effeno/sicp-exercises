@@ -17,7 +17,7 @@
                    (max p1 p2 p3 p4))))
 
 (define (in-interval i x)
-  (and (> x (lower-bound i)) (< x (upper-bound i))))
+  (and (>= x (lower-bound i)) (<= x (upper-bound i))))
 
 (define (div-interval x y)
   (if (in-interval y 0)
