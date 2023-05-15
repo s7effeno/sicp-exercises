@@ -1,0 +1,41 @@
+let [l, u] = [l1, u1] + [l2, u2]
+width([l, u]) = (u - l) / 2
+              = (u1 + u2 - l1 + l2)
+              = (u1 - l1) / 2 + (u2 - l2) / 2
+              = width([l1, u1]) + width([l2, u2])
+
+example:
+width([3, 7] + [1, 9]) = width([4, 16])
+                       = (16 - 4) / 2 = 6
+                       = width([3, 7]) + width(1, 9)
+                       = (7 - 3) / 2 + (9 - 1) / 2 = 6
+
+
+let [l, u] = [l1, u1] * [l2, u2]
+           = [
+               min(l1 * l2, l1 * u2, u1 * l2, u1 * u2),
+               max(l1 * l2, l1 * u2, u1 * l2, u1 * u2)
+             ]
+
+width([l, u]) = width(
+                  [
+                    min(l1 * l2, l1 * u2, u1 * l2, u1 * u2),
+                    max(l1 * l2, l1 * u2, u1 * l2, u1 * u2)
+                  ]
+                )
+              = (
+                  max(l1 * l2, l1 * u2, u1 * l2, u1 * u2)
+                  - min(l1 * l2, l1 * u2, u1 * l2, u1 * u2)
+                ) / 2
+              = (u - l) / 2
+
+the width of the result isn't a function of the widths
+of the operands as in addition/subtraction
+
+example:
+if the width of the result were a function of the widths
+of the operands, given the intervals a, b, c, d such that
+width(a) = width(b), width(c) = width(d) = w2, then
+width(a * c) = width(b * d);
+but given a = [0, 2], b = [1, 3], c = [2, 8], d = [4, 10], then
+width(a * c) = width([0, 16]) = 8 != width(b * d) = width([4, 30]) = 13.
