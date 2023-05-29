@@ -1,0 +1,27 @@
+(define (square-list items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons (square (car things))
+                    answer))))
+  (iter items nil))
+
+`square-list` produces the answer list in the reverse order because
+cons is prepending to the list instead of appending
+
+(define (square-list items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons answer
+                    (square 
+                     (car things))))))
+  (iter items nil))
+
+this doesn't work either because given `items = list(a b c)`,
+`answer` would have the following format:
+(((nil . a^2) . b^2) . c^2)
+instead of
+(a^2 . (b^2 . (c^2 . nil)))
