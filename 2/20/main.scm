@@ -1,0 +1,18 @@
+(define (even? n) (= (remainder n 2) 0))
+(define (odd? n) (not (even? n)))
+(define (parity n)
+  (if (even? n) even? odd?))
+
+(define (same-parity x . y)
+  (define (take? n) ((parity x) n))
+  (define (iter l)
+    (if (null? l)
+        (list)
+        (if (take? (car l))
+            (cons (car l) (iter (cdr l)))
+            (iter (cdr l)))))
+  (iter (cons x y)))
+
+(display (same-parity 1 2 3 4 5 6 7))
+(newline)
+(display (same-parity 2 3 4 5 6 7))
