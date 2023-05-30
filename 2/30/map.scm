@@ -1,5 +1,11 @@
 (define nil (list))
 
+(define (map proc items)
+  (if (null? items)
+      nil
+      (cons (proc (car items))
+            (map proc (cdr items)))))
+
 (define (square x) (* x x))
 
 (define (square-tree tree)
