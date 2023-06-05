@@ -1,5 +1,5 @@
-; `op` should respect the associative property for`fold-right`
-; and `fold-left` to produce ; the same values for any sequence
+; `op` should be both commutative and associative for`fold-right`
+; and `fold-left` to produce the same values for any sequence
 
 (define nil (list))
 ve 
