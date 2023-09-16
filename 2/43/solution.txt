@@ -1,0 +1,5 @@
+changing the order in this way causes `queen-cols` to be evaluated
+`board-size` times instead of 1 time for each recursion; since there
+are `board-size` levels of recursion, `queen-cols` will be evaluated
+a total of `board-size` ^ `board-size` times.
+the time required will be `board-size` ^ `board-size` T.
