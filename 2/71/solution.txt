@@ -1,0 +1,2 @@
+1 bits for the most frequent symbol
+n-1 bits for the least frequent symbol
