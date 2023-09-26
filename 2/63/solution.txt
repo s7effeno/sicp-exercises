@@ -1,0 +1,25 @@
+1) the first one collects the tree starting from the "deepest" left node
+   then merging it with its parent and the right node and then going up,
+   generating a recursive process.
+   the second one starts collecting from the top of the tree, going to
+   the right and after collecting to the deepest right node it comes back
+   up prepending the ones on the left, generating an iterative process.
+   both procedures generate always the same list given any representation of a tree
+   i.e. the entries sorted in ascending order.
+
+(tree->list-1 tree1)
+> (1 3 5 7 9 11)
+(tree->list-1 tree2)
+> (1 3 5 7 9 11)
+(tree->list-1 tree3)
+> (1 3 5 7 9 11)
+
+(tree->list-2 tree1)
+> (1 3 5 7 9 11)
+(tree->list-2 tree2)
+> (1 3 5 7 9 11)
+(tree->list2 tree3)
+> (1 3 5 7 9 11)
+
+2) the order of growh is not the same if whe consider that appending a list to another
+   grows as θ(n), meaning that the second implementation grows more slowly
