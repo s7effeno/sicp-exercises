@@ -33,10 +33,8 @@
                (adjoin-set x (cdr set))))))
 
 (define (successive-merge nodes)
-  (display nodes)
-  (newline)
-  (if (= (length nodes) 1)
-      nodes
+  (if (null? (cdr nodes))
+      (car nodes)
       (let ((merged (make-code-tree (car nodes)
                                     (cadr nodes)))
             (rest (cddr nodes)))
@@ -82,10 +80,17 @@
                       tree)
        (encode (cdr message) tree))))
 
-(display (length (encode '(GET A JOB SHA NA NA NA NA NA NA NA NA
+(display (length (encode '(
+          GET A JOB SHA NA NA NA NA NA NA NA NA
           GET A JOB SHA NA NA NA NA NA NA NA NA
           WAH YIP YIP YIP YIP
           YIP YIP YIP YIP YIP
           SHA BOOM)
           (generate-huffman-tree '((A 2) (BOOM 1) (GET 2) (JOB 2)
                                    (NA 16) (SHA 3) (YIP 9) (WAH 1))))))
+
+; the output reports 84 bits are required
+; if the symbol were encoded with fixed lenght, the number of bits needed would be
+;   log_2(length of alphabet) * number of words in song
+;  =log_2(8) * 36
+;  =3 * 36 = 108

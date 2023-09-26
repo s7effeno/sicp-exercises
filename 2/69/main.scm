@@ -33,8 +33,8 @@
                (adjoin-set x (cdr set))))))
 
 (define (successive-merge nodes)
-  (if (= (length nodes) 1)
-      nodes
+  (if (null? (cdr nodes))
+      (car nodes)
       (let ((merged (make-code-tree (car nodes)
                                     (cadr nodes)))
             (rest (cddr nodes)))
@@ -53,5 +53,4 @@
   (successive-merge 
    (make-leaf-set pairs)))
 
-(display (generate-huffman-tree '((H 1) (G 1) (F 1) (E 1)
-                                  (D 1) (C 1) (B 3) (A 8))))
+(display (generate-huffman-tree '((A 4) (B 2) (C 1) (D 1))))
