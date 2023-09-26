@@ -1,0 +1,17 @@
+1. partial-tree creates the balanced tree by dividing elts in ~half
+   at each recursion, the first half makes the left subtree, 
+   the first element of the second half is the entry of the current node
+   and the remaining part of the second half makes the right subtree.
+   So, the left subtree is generated recursively by (partial-tree elts x)
+   where x is the length of the first half and `cdr` of the result will be fed
+   to the same function to generate the right subtree; `cdr` of the result again
+   will be given back to the caller to continue the recursion on the right.
+
+         5 
+       /   \
+      /     \
+     1       9
+      \     / \
+       3   7  11
+   
+2. Θ(n), one function invocation for each node
