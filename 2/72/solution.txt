@@ -1,0 +1,5 @@
+Θ(n) for the most frequent symbol:
+    checks once in (symbols root) whether to go left or right.
+Θ(nlogn) for the least frequent symbol:
+    checks logn times (reaching the bottom of the tree) to know
+    the path to take.
