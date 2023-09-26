@@ -24,32 +24,34 @@
         (append (symbols left) 
                 (symbols right)) (+ (weight left) (weight right))))
 
+(define (adjoin-set x set)
+  (cond ((null? set) (list x))
+        ((< (weight x) (weight (car set))) 
+         (cons x set))
+        (else 
+         (cons (car set)
+               (adjoin-set x (cdr set))))))
+
 (define (successive-merge nodes)
-  (define (adjoin-node x nodes)
-    (if (or (null? nodes)
-            (< (weight x) (weight (car nodes))))
-        (cons x nodes)
-        (cons (car nodes)
-              (adjoin-node x (cdr nodes)))))
   (if (= (length nodes) 1)
       nodes
       (let ((merged (make-code-tree (car nodes)
                                     (cadr nodes)))
             (rest (cddr nodes)))
-        (successive-merge (adjoin-node merged rest)))))
+        (successive-merge (adjoin-set merged rest)))))
 
 (define (make-leaf-set pairs)
-  (list (make-leaf 'H 1)
-        (make-leaf 'G 1)
-        (make-leaf 'F 1)
-        (make-leaf 'E 1)
-        (make-leaf 'D 1)
-        (make-leaf 'C 1)
-        (make-leaf 'B 3)
-        (make-leaf 'A 8)))
+  (if (null? pairs)
+      '()
+      (let ((pair (car pairs)))
+        (adjoin-set 
+         (make-leaf (car pair)
+                    (cadr pair))
+         (make-leaf-set (cdr pairs))))))
 
 (define (generate-huffman-tree pairs)
   (successive-merge 
    (make-leaf-set pairs)))
 
-(display (generate-huffman-tree '()))
+(display (generate-huffman-tree '((H 1) (G 1) (F 1) (E 1)
+                                  (D 1) (C 1) (B 3) (A 8))))
