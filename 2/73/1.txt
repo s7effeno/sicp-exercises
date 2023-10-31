@@ -1,0 +1,2 @@
+number? and variable? can't be assimilate because the dispatch is according to operator and there
+are no operators to be extracted in the expression
