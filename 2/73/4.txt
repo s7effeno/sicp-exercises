@@ -1,0 +1,1 @@
+all the corresponding `put`s must invert `op` and `type` as well
