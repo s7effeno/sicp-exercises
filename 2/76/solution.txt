@@ -1,0 +1,24 @@
+explicit dispatch:
+    new operation:
+        add dispatch
+    new type:
+        for each operation:
+            modify dispatch
+
+data-directed style:
+    new operation:
+        for each type:
+            put operation
+    new type:
+        for each operation:
+            put operation
+
+message passing:
+    new operation:
+        for each type:
+            modify dispatch
+    new type:
+        add dispatch
+
+when new operations must often be added the best is explicit dispatch
+when new types must often be added the best is either message passing data-directed style
