@@ -1,0 +1,15 @@
+this works because when dispatching, the type tag 'complex is found
+
+(magnitude z)
+(magnitude '(complex (rectangular (5 . 6))))
+(apply-generic 'magnitude z)
+(apply (get 'magnitude 'complex) '(rectangular (5 . 6)))
+(apply magnitude '(rectangular (5 . 6)))
+(magnitude '(rectangular 5 . 6))
+(apply-generic 'magnitude '(rectangular 5 . 6))
+(apply (get 'magnitude 'rectangular) '(5 . 6))
+(apply magnitude-rectangular '(5 . 6))
+(magnitude-rectangular '(5 . 6))
+...
+
+apply generic is invoked two timems

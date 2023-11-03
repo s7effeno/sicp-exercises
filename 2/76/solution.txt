@@ -12,6 +12,7 @@ data-directed style:
     new type:
         for each operation:
             put operation
+        (but it's isolated when installing as a package)
 
 message passing:
     new operation:
